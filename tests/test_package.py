@@ -18,7 +18,7 @@ class PackagePrivacyTests(unittest.TestCase):
             public = ("BUILD_SPEC.md", "DESIGN.md", "TESTING.md", "RELEASING.md")
             files = ["src/tallydesklet/__init__.py", "data/tallydesklet.desktop",
                      "data/icons/tallydesklet.svg", "data/tallydesklet.1",
-                     "debian/copyright", "debian/changelog", "README.md", "LICENSE"]
+                     "debian/copyright", "debian/changelog", "README.md", "README.fa.md", "LICENSE"]
             files += [f"docs/{name}" for name in public]
             examples = ("dark.png", "light.png", "settings.png")
             files += [f"docs/examples/{name}" for name in examples]
@@ -35,6 +35,7 @@ class PackagePrivacyTests(unittest.TestCase):
             self.assertEqual({p.name for p in docs.iterdir()}, set(public) | {"examples"})
             self.assertEqual({p.name for p in (docs / "examples").iterdir()}, set(examples))
             self.assertTrue((destination / "usr/share/doc/tallydesklet/LICENSE").is_file())
+            self.assertTrue((destination / "usr/share/doc/tallydesklet/README.fa.md").is_file())
             for path in destination.rglob("*"):
                 if path.is_file():
                     self.assertNotIn(b"PRIVATE_SENTINEL", path.read_bytes(), str(path))

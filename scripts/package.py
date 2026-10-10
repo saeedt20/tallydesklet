@@ -45,6 +45,8 @@ def stage(destination):
         path = destination / target
         path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / source, path)
+    if (ROOT / "README.fa.md").is_file():
+        shutil.copyfile(ROOT / "README.fa.md", destination / "usr/share/doc/tallydesklet/README.fa.md")
     shutil.copyfile(ROOT / "data/icons/tallydesklet.svg",
                     destination / "usr/share/icons/hicolor/scalable/apps/mint-meter.svg")
     (destination / "usr/share/doc/tallydesklet/changelog.Debian.gz").write_bytes(
